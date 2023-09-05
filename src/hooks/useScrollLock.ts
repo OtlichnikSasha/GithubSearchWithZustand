@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { isIOS } from '../helpers/isIOS';
+import { isIOS } from '../helpers/isIOS.helper';
 
 export const useScrollLock = () => {
   const lockScroll = useCallback(() => {

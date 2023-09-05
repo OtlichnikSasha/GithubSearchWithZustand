@@ -6,19 +6,19 @@ interface IUsersStore {
   users: UserModel[];
   total_count: number;
   isLoading: boolean;
-  fetchUsers: (params: SearchUsersParams) => void;
+  fetchRepos: (params: SearchUsersParams) => void;
 }
 
-export const useSearchUsersStore = create(
+export const useSearchRepositoriesStore = create(
   immer<IUsersStore>((set) => ({
     users: [],
     total_count: 0,
     isLoading: false,
-    fetchUsers: async (params) => {
+    fetchRepos: async (params) => {
       set((state) => {
         state.isLoading = true;
       });
-      const { data } = await githubUsersService.getUsers(params);
+      const { data } = await githubUsersService.getRepositories(params);
       set((state) => {
         state.total_count = data.total_count;
       });

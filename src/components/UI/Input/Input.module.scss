@@ -3,8 +3,9 @@
   height: 100%;
   display: flex;
   align-items: center;
-  border: 1px solid #d5d6db;
-  border-radius: 8px;
+  background-color: #0d1117;
+  border: 1px solid var(--Primary_Border_Color);
+  border-radius: 6px;
   transition: border 0.4s;
 }
 
@@ -16,6 +17,7 @@
   height: 30px;
   min-height: 56px;
   border-radius: 8px;
+  color: #e0e7ed;
 
   @include respond(mobile) {
     padding: 21px 8px;
@@ -49,7 +51,7 @@
 
   &_withDefaultPlaceholder {
     &::placeholder {
-      color: var(--BLACK_GRAY_56);
+      color: var(--Darkened_Color);
       display: block;
       visibility: initial;
       opacity: 1;
@@ -71,26 +73,11 @@
   }
 
   &:focus {
-    outline: none;
-    border-color: #0993f5;
-    padding: 21px 15px 7px;
-  }
-
-  &:not(:placeholder-shown) {
-    padding: 21px 15px 7px;
-    color: var(--BLACK);
-  }
-
-  &_nonePlaceholder {
-    &:not(:placeholder-shown) {
-      padding: 7px 15px;
+    ~ .wrapper {
+      outline: none;
+      border-color: var(--Accent_Border_Color);
+      transition: border 0.3s;
     }
-  }
-
-  &:focus ~ .label,
-  &:not(:placeholder-shown) ~ .label {
-    top: 15px;
-    color: var(--BLACK_GRAY_56);
   }
 }
 
@@ -101,5 +88,5 @@
   transform: translateY(-50%);
   transition: 0.2s ease all;
   pointer-events: none;
-  color: var(--BLACK_GRAY_56);
+  color: var(--Darkened_Color);
 }

@@ -4,23 +4,23 @@
 
 body {
   font-family: var(--Primary_Font_Family);
-  background: #010409;
+  background: var(--Primary_Background);
   color: var(--Primary_Color);
 
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 12px;
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--PA_Icon_Overlay_Primary);
+    background: #424242;
   }
 
   &::-webkit-scrollbar-thumb {
     background: #686868;
-    border-radius: 512px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #686868;
+    background: #989797;
+    transition: background 0.3s;
   }
 }

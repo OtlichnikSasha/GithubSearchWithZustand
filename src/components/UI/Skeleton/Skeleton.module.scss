@@ -14,7 +14,7 @@
   -ms-user-select: none;
   user-select: none;
 
-  background-color: rgba(0, 0, 0, 0.11);
+  background-color: var(--Primary_Border_Color);
 }
 
 @keyframes total_skeleton_animation {

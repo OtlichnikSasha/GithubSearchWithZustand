@@ -1,0 +1,23 @@
+.wrapper {
+  padding: 96px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+  max-width: 600px;
+}
+
+.logo {
+  margin-bottom: 24px;
+}
+
+.background_image {
+  margin-top: 84px;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
