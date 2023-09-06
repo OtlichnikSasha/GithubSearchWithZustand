@@ -7,6 +7,7 @@ import { useSearchRepositoriesStore } from '@/store/modules/searchRepositories.m
 import cn from 'classnames';
 import { LinksEnum } from '@/types/enums/LinksEnum';
 import { Skeleton } from '@/components/UI/Skeleton/Skeleton';
+import { formatNumberHelper } from '@/helpers/formatNumber.helper';
 
 export const Sidebar = () => {
   const [searchParams] = useSearchParams();
@@ -61,13 +62,14 @@ export const Sidebar = () => {
             <Link to={`..?q=${searchParams.get('q')}&type=${link.type}`}>
               {link.icon}
               <p>{link.name}</p>
-              <span>
-                {withdrawalTotal[link.type].isLoading ? (
-                  <Skeleton className={styles.skeleton} />
-                ) : (
-                  withdrawalTotal[link.type].totalCount
-                )}
-              </span>
+
+              {withdrawalTotal[link.type].isLoading ? (
+                <Skeleton className={styles.skeleton} />
+              ) : (
+                <span className={styles.totalCount}>
+                  {formatNumberHelper(withdrawalTotal[link.type].totalCount)}
+                </span>
+              )}
             </Link>
           </li>
         ))}

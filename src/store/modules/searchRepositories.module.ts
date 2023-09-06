@@ -2,16 +2,16 @@ import { githubUsersService } from '@/services/githubUsersService';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-interface IUsersStore {
-  users: UserModel[];
+interface IReposStore {
+  repos: RepositoriesModel[];
   total_count: number;
   isLoading: boolean;
   fetchRepos: (params: SearchUsersParams) => void;
 }
 
 export const useSearchRepositoriesStore = create(
-  immer<IUsersStore>((set) => ({
-    users: [],
+  immer<IReposStore>((set) => ({
+    repos: [],
     total_count: 0,
     isLoading: false,
     fetchRepos: async (params) => {
@@ -23,7 +23,7 @@ export const useSearchRepositoriesStore = create(
         state.total_count = data.total_count;
       });
       set((state) => {
-        state.users = data.items;
+        state.repos = data.items;
       });
       set((state) => {
         state.isLoading = false;

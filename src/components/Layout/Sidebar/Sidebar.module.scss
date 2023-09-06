@@ -40,7 +40,7 @@
       a {
         width: 100%;
         display: grid;
-        grid-template-columns: 20px auto minmax(20px, 100px);
+        grid-template-columns: 20px auto minmax(20px, max-content);
         gap: 8px;
         align-items: center;
         padding: 6px 8px;
@@ -58,5 +58,17 @@
     font-weight: 500;
     padding: 16px 16px 8px;
     font-size: 16px;
+  }
+
+  .totalCount {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    border-radius: 20px;
+    background-color: rgba(110, 118, 129, 0.4);
+    color: rgb(230, 237, 243);
+    height: 20px;
+    padding: 0px 8px;
   }
 }
