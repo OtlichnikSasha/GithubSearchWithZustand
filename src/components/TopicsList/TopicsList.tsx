@@ -1,32 +1,28 @@
-import { useSearchRepositoriesStore } from '@/store/modules/api/searchRepositories.module';
+import { useSearchTopicsStore } from '@/store/modules/api/searchTopics.module';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Skeleton } from '../UI/Skeleton/Skeleton';
+import styles from './TopicsList.module.scss';
 import { formatNumberHelper } from '@/helpers/formatNumber.helper';
-import styles from './RepositoriesList.module.scss';
-import { RepositoryItem } from '../RepositoryItem/RepositoryItem';
 
 const loadingItems = new Array(8).fill('');
 const per_page = 25;
 
-export const RepositoriesList = () => {
+export const TopicsList = () => {
   const [searchParams] = useSearchParams();
-  const { fetchRepos, isLoading, total_count, repos } = useSearchRepositoriesStore(
-    (state) => state,
-  );
+  const { fetchTopics, isLoading, total_count, topics } = useSearchTopicsStore((state) => state);
 
   useEffect(() => {
     const searchParamsQuery = searchParams.get('q');
     if (searchParamsQuery)
-      fetchRepos({
+      fetchTopics({
         q: searchParamsQuery,
         per_page,
       });
   }, [searchParams.get('q')]);
-
   return (
     <>
-      {!repos.length && !isLoading ? (
+      {!topics.length && !isLoading ? (
         <p>Ничего не найдено</p>
       ) : (
         <div className={styles.repositoriesList}>
@@ -39,8 +35,8 @@ export const RepositoriesList = () => {
           ) : (
             <>
               {formatNumberHelper(total_count)}
-              {repos?.map((repo) => (
-                <RepositoryItem key={repo.id} repository={repo} />
+              {topics?.map((topic) => (
+                <div key={`${topic.name}-${topic.created_at}`}>{topic.name}</div>
               ))}
             </>
           )}

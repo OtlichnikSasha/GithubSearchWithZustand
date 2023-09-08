@@ -8,4 +8,12 @@ export const githubUsersService = {
   async getRepositories(params: unknown) {
     return await api.get('/repositories', { params });
   },
+
+  async getFiles(params: unknown) {
+    return await api.get('/code', { params });
+  },
+
+  async getTopics(params: unknown) {
+    return await api.get('/topics', { params });
+  },
 };

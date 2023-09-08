@@ -6,7 +6,6 @@ export const useScrollLock = () => {
     const scrollBarCompensation = window.innerWidth - document.body.offsetWidth;
 
     document.body.style.overflow = 'hidden';
-    //padding нужен тк пропадает скролл и страница чуть дергается
     document.body.style.paddingRight = `${scrollBarCompensation}px`;
 
     document.body.classList.add('modal-open');

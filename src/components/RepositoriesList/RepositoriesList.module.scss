@@ -1,0 +1,11 @@
+.repositoriesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skeletonItem {
+  width: 100%;
+  border-radius: 6px;
+  height: 142.4px;
+}

@@ -13,14 +13,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ defaultPlaceHolder, placeholder, disabled, onChange, ...rest }, ref) => {
     return (
       <div className={styles.wrapper}>
-        <input
-          className={cn(styles.floatingInput, !placeholder && styles.floatingInput_nonePlaceholder)}
-          ref={ref}
-          disabled={disabled}
-          placeholder={placeholder ? placeholder : defaultPlaceHolder}
-          onChange={onChange}
-          {...rest}
-        />
+        <div className={styles.wrapper__block}>
+          <input
+            className={cn(
+              styles.floatingInput,
+              !placeholder && styles.floatingInput_nonePlaceholder,
+            )}
+            ref={ref}
+            disabled={disabled}
+            placeholder={placeholder ? placeholder : defaultPlaceHolder}
+            onChange={onChange}
+            {...rest}
+          />
+          <label className={styles.label}>{defaultPlaceHolder || placeholder}</label>
+        </div>
       </div>
     );
   },

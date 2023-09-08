@@ -7,6 +7,11 @@
   border: 1px solid var(--Primary_Border_Color);
   border-radius: 6px;
   transition: border 0.4s;
+
+  &__block {
+    width: 100%;
+    position: relative;
+  }
 }
 
 .floatingInput {
@@ -72,12 +77,10 @@
     }
   }
 
-  &:focus {
-    ~ .wrapper {
-      outline: none;
-      border-color: var(--Accent_Border_Color);
-      transition: border 0.3s;
-    }
+  &:focus ~ .label,
+  &:not(:placeholder-shown) ~ .label {
+    top: 15px;
+    font-size: 13px;
   }
 }
 

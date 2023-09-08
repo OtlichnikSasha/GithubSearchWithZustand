@@ -2,7 +2,7 @@ import { useElementOnScreen } from '@/hooks/useElementOnScreen';
 import { RefObject, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Skeleton } from '../UI/Skeleton/Skeleton';
-import { useSearchUsersStore } from '@/store/modules/searchUsers.module';
+import { useSearchUsersStore } from '@/store/modules/api/searchUsers.module';
 import { formatNumberHelper } from '@/helpers/formatNumber.helper';
 import { UserItem } from '../UserItem/UserItem';
 import styles from './UsersList.module.scss';
@@ -47,7 +47,7 @@ export const UsersList = () => {
           ))}
         </div>
       ) : (
-        <section className={styles.content}>
+        <>
           {!users.length ? (
             <p>Ничего не найдено</p>
           ) : (
@@ -59,7 +59,7 @@ export const UsersList = () => {
               <div ref={containerRef as RefObject<HTMLDivElement>} />
             </section>
           )}
-        </section>
+        </>
       )}
     </>
   );

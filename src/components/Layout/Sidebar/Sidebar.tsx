@@ -2,23 +2,29 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { sidebarLinks } from './Sidebar.constants';
 import styles from './Sidebar.module.scss';
 import { useEffect, useMemo } from 'react';
-import { useSearchUsersStore } from '@/store/modules/searchUsers.module';
-import { useSearchRepositoriesStore } from '@/store/modules/searchRepositories.module';
+import { useSearchUsersStore } from '@/store/modules/api/searchUsers.module';
+import { useSearchRepositoriesStore } from '@/store/modules/api/searchRepositories.module';
 import cn from 'classnames';
 import { LinksEnum } from '@/types/enums/LinksEnum';
 import { Skeleton } from '@/components/UI/Skeleton/Skeleton';
 import { formatNumberHelper } from '@/helpers/formatNumber.helper';
+import { useSearchCodeStore } from '@/store/modules/api/searchCode.module';
+import { useSearchTopicsStore } from '@/store/modules/api/searchTopics.module';
 
 export const Sidebar = () => {
   const [searchParams] = useSearchParams();
   const usersStore = useSearchUsersStore((state) => state);
   const repositoriesStore = useSearchRepositoriesStore((state) => state);
+  const filesStore = useSearchCodeStore((state) => state);
+  const topicsStore = useSearchTopicsStore((state) => state);
 
   useEffect(() => {
     const searchQuery = searchParams.get('q');
     if (searchQuery) {
-      usersStore.fetchUsers({ q: searchQuery, per_page: 1 });
-      repositoriesStore.fetchRepos({ q: searchQuery, per_page: 1 });
+      usersStore.fetchUsers({ q: searchQuery, per_page: 0 });
+      repositoriesStore.fetchRepos({ q: searchQuery, per_page: 0 });
+      filesStore.fetchFiles({ q: searchQuery, per_page: 0 });
+      topicsStore.fetchTopics({ q: searchQuery, per_page: 0 });
     }
   }, [searchParams.get('q')]);
 
@@ -33,12 +39,12 @@ export const Sidebar = () => {
         totalCount: repositoriesStore.total_count,
       },
       [LinksEnum.CODE]: {
-        isLoading: true,
-        totalCount: 25,
+        isLoading: filesStore.isLoading,
+        totalCount: filesStore.total_count,
       },
       [LinksEnum.TOPICS]: {
-        isLoading: true,
-        totalCount: 28,
+        isLoading: topicsStore.isLoading,
+        totalCount: topicsStore.total_count,
       },
     };
   }, [
@@ -46,6 +52,10 @@ export const Sidebar = () => {
     usersStore.total_count,
     repositoriesStore.isLoading,
     repositoriesStore.total_count,
+    filesStore.isLoading,
+    filesStore.total_count,
+    topicsStore.isLoading,
+    topicsStore.total_count,
   ]);
 
   return (
