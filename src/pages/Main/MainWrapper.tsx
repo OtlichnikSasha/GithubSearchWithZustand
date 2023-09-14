@@ -8,6 +8,7 @@ import { UsersList } from '@/components/UsersList/UsersList';
 import { LinksEnum } from '@/types/enums/LinksEnum';
 import { RepositoriesList } from '@/components/RepositoriesList/RepositoriesList';
 import { TopicsList } from '@/components/TopicsList/TopicsList';
+import { ReactComponent as IconGithub } from '@/assets/images/icons/icon-github.svg';
 
 const typesVariants = Object.values(LinksEnum);
 
@@ -39,7 +40,14 @@ export const Main = () => {
 
   return (
     <>
-      <Input placeholder='Поиск' ref={searchInputRef} onKeyDown={handleKeyEvent} />
+      <header className={styles.header}>
+        <div className={styles.header__container}>
+          <div className={styles.header__logo}>
+            <IconGithub />
+          </div>
+          <Input placeholder='Поиск' ref={searchInputRef} onKeyDown={handleKeyEvent} />
+        </div>
+      </header>
 
       <main className={styles.main}>
         <Sidebar />

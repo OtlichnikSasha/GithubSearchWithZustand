@@ -1,4 +1,5 @@
 import { githubUsersService } from '@/services/githubUsersService';
+import { AxiosResponse } from 'axios';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -18,16 +19,21 @@ export const useSearchCodeStore = create(
       set((state) => {
         state.isLoading = true;
       });
-      const { data } = await githubUsersService.getFiles(params);
-      set((state) => {
-        state.total_count = data.total_count;
-      });
-      set((state) => {
-        state.files = data.items;
-      });
-      set((state) => {
-        state.isLoading = false;
-      });
+      try {
+        const { data } = await githubUsersService.getFiles(params);
+        set((state) => {
+          state.total_count = data.total_count;
+        });
+        set((state) => {
+          state.files = data.items;
+        });
+      } catch (_) {
+        return;
+      } finally {
+        set((state) => {
+          state.isLoading = false;
+        });
+      }
     },
   })),
 );

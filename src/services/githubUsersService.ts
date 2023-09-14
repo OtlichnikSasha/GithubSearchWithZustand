@@ -2,11 +2,11 @@ import { api } from '@/config/api';
 
 export const githubUsersService = {
   async getUsers(params: SearchUsersParams) {
-    return await api.get<SearchUsersResponse>('/users', { params });
+    return await api.get<SearchResponse<UserModel>>('/users', { params });
   },
 
   async getRepositories(params: unknown) {
-    return await api.get('/repositories', { params });
+    return await api.get<SearchResponse<RepositoryModel>>('/repositories', { params });
   },
 
   async getFiles(params: unknown) {
@@ -14,6 +14,6 @@ export const githubUsersService = {
   },
 
   async getTopics(params: unknown) {
-    return await api.get('/topics', { params });
+    return await api.get<SearchResponse<TopicModel>>('/topics', { params });
   },
 };

@@ -4,8 +4,9 @@ import { useSearchParams } from 'react-router-dom';
 import { Skeleton } from '../UI/Skeleton/Skeleton';
 import { useSearchUsersStore } from '@/store/modules/api/searchUsers.module';
 import { formatNumberHelper } from '@/helpers/formatNumber.helper';
-import { UserItem } from '../UserItem/UserItem';
+import { UserItem } from './UserItem/UserItem';
 import styles from './UsersList.module.scss';
+import { SearchNotFound } from '../SearchNotFound/SearchNotFound';
 
 const loadingItems = new Array(8).fill('');
 const per_page = 25;
@@ -38,8 +39,20 @@ export const UsersList = () => {
     }
   }, [isVisible]);
 
+  if (!users.length && !isLoading) {
+    return (
+      <>
+        {formatNumberHelper(total_count)}
+        <SearchNotFound
+          title='По вашему запросу не найдено ни одного пользователя.'
+          description='Вы можете попробовать другой запрос.'
+        />
+      </>
+    );
+  }
+
   return (
-    <>
+    <section className={styles.usersList}>
       {isLoading ? (
         <div>
           {loadingItems.map((_, index) => (
@@ -48,19 +61,13 @@ export const UsersList = () => {
         </div>
       ) : (
         <>
-          {!users.length ? (
-            <p>Ничего не найдено</p>
-          ) : (
-            <section className={styles.usersList}>
-              {formatNumberHelper(total_count)} results
-              {users.map((user) => (
-                <UserItem key={user.id} user={user} />
-              ))}
-              <div ref={containerRef as RefObject<HTMLDivElement>} />
-            </section>
-          )}
+          {formatNumberHelper(total_count)} results
+          {users.map((user) => (
+            <UserItem key={user.id} user={user} />
+          ))}
+          <div ref={containerRef as RefObject<HTMLDivElement>} />
         </>
       )}
-    </>
+    </section>
   );
 };

@@ -18,16 +18,21 @@ export const useSearchUsersStore = create(
       set((state) => {
         state.isLoading = true;
       });
-      const { data } = await githubUsersService.getUsers(params);
-      set((state) => {
-        state.total_count = data.total_count;
-      });
-      set((state) => {
-        state.users = data.items;
-      });
-      set((state) => {
-        state.isLoading = false;
-      });
+      try {
+        const { data } = await githubUsersService.getUsers(params);
+        set((state) => {
+          state.total_count = data.total_count;
+        });
+        set((state) => {
+          state.users = data.items;
+        });
+      } catch (_) {
+        return;
+      } finally {
+        set((state) => {
+          state.isLoading = false;
+        });
+      }
     },
   })),
 );

@@ -31,19 +31,19 @@ export const Sidebar = () => {
   const withdrawalTotal = useMemo(() => {
     return {
       [LinksEnum.USERS]: {
-        isLoading: usersStore.isLoading,
+        isLoading: usersStore.isLoading && !usersStore.total_count,
         totalCount: usersStore.total_count,
       },
       [LinksEnum.REPOSITORIES]: {
-        isLoading: repositoriesStore.isLoading,
+        isLoading: repositoriesStore.isLoading && !repositoriesStore.total_count,
         totalCount: repositoriesStore.total_count,
       },
       [LinksEnum.CODE]: {
-        isLoading: filesStore.isLoading,
+        isLoading: filesStore.isLoading && !filesStore.total_count,
         totalCount: filesStore.total_count,
       },
       [LinksEnum.TOPICS]: {
-        isLoading: topicsStore.isLoading,
+        isLoading: topicsStore.isLoading && !topicsStore.total_count,
         totalCount: topicsStore.total_count,
       },
     };

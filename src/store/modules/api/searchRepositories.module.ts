@@ -18,16 +18,21 @@ export const useSearchRepositoriesStore = create(
       set((state) => {
         state.isLoading = true;
       });
-      const { data } = await githubUsersService.getRepositories(params);
-      set((state) => {
-        state.total_count = data.total_count;
-      });
-      set((state) => {
-        state.repos = data.items;
-      });
-      set((state) => {
-        state.isLoading = false;
-      });
+      try {
+        const { data } = await githubUsersService.getRepositories(params);
+        set((state) => {
+          state.total_count = data.total_count;
+        });
+        set((state) => {
+          state.repos = data.items;
+        });
+      } catch (_) {
+        return;
+      } finally {
+        set((state) => {
+          state.isLoading = false;
+        });
+      }
     },
   })),
 );

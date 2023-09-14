@@ -1,9 +1,3 @@
-declare interface SearchUsersResponse {
-  incomplete_results: boolean;
-  items: UserModel[];
-  total_count: number;
-}
-
 declare interface SearchUsersParams {
   q: string;
   sort?: 'followers' | 'repositories' | 'joined';
