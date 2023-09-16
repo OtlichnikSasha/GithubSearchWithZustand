@@ -1,5 +1,4 @@
 import { githubUsersService } from '@/services/githubUsersService';
-import { AxiosResponse } from 'axios';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
