@@ -2,19 +2,32 @@ import { ReactNode } from 'react';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-interface IModalStore {
-  isOpen: boolean;
-  options: unknown;
-  content: ReactNode | null;
-  handleModal: (content: ReactNode) => void;
+interface IModalActions {
+  handleModal: (content: ReactNode, options?: IOptions) => void;
   openModal: () => void;
   closeModal: () => void;
+}
+
+interface IModalState {
+  isOpen: boolean;
+  options: IOptions;
+  content: ReactNode | null;
+}
+
+type IModalStore = IModalActions & IModalState;
+
+interface IOptions {
+  title?: string;
+  overlayClassName?: string;
+  bodyClassName?: string;
+  containerClassName?: string;
+  withCloseButton?: boolean;
 }
 
 export const useModalStore = create(
   immer<IModalStore>((set) => ({
     isOpen: false,
-    options: {} as unknown,
+    options: {} as IOptions,
     content: null,
     openModal: () => {
       set((state) => {
@@ -25,7 +38,7 @@ export const useModalStore = create(
       set((state) => {
         state.isOpen = false;
         state.content = null;
-        state.options = {} as unknown;
+        state.options = {} as IOptions;
       });
     },
     handleModal: (content) => {

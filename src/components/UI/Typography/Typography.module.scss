@@ -9,6 +9,10 @@
   font-weight: 400;
 }
 
+.font_weight_500 {
+  font-weight: 500;
+}
+
 .font_weight_600 {
   font-weight: 600;
 }
@@ -19,6 +23,16 @@
 
 .font_weight_bold {
   font-weight: bold;
+}
+
+// Colors
+
+.color_7d8590 {
+  color: #7d8590;
+}
+
+.color_2f81f7 {
+  color: #2f81f7;
 }
 
 // Text-decoration
@@ -47,9 +61,21 @@
 
 // text variants
 
+.variant_12_14 {
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.08px;
+}
+
 .variant_18_24 {
   font-size: 18px;
   line-height: 24px;
+  letter-spacing: -0.12px;
+}
+
+.variant_14_16 {
+  font-size: 14px;
+  line-height: 16px;
   letter-spacing: -0.12px;
 }
 

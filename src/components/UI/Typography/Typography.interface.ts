@@ -6,8 +6,18 @@ export interface ITypographyProps {
   mobileResponse?: string | number;
   tabletResponse?: string | number;
   fontFamily?: 'Inter';
-  fontWeight?: '400' | '600' | '900' | 'bold';
-  color?: 'ffffff' | 'ffffffa3' | 'dcdbdd' | '252129' | '666666' | 'a2a2a3' | '17212b8f' | '9f9f9f';
+  fontWeight?: '400' | '500' | '600' | '900' | 'bold';
+  color?:
+    | 'ffffff'
+    | 'ffffffa3'
+    | 'dcdbdd'
+    | '252129'
+    | '666666'
+    | 'a2a2a3'
+    | '17212b8f'
+    | '9f9f9f'
+    | '7d8590'
+    | '2f81f7';
   variant?: variants;
   tabletVariant?: variants;
   mobileVariant?: variants;

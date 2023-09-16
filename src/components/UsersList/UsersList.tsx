@@ -5,8 +5,8 @@ import { Skeleton } from '../UI/Skeleton/Skeleton';
 import { useSearchUsersStore } from '@/store/modules/api/searchUsers.module';
 import { formatNumberHelper } from '@/helpers/formatNumber.helper';
 import { UserItem } from './UserItem/UserItem';
-import styles from './UsersList.module.scss';
 import { SearchNotFound } from '../SearchNotFound/SearchNotFound';
+import { ListWrapper } from '../ListWrapper/ListWrapper';
 
 const loadingItems = new Array(8).fill('');
 const per_page = 25;
@@ -52,7 +52,7 @@ export const UsersList = () => {
   }
 
   return (
-    <section className={styles.usersList}>
+    <ListWrapper>
       {isLoading ? (
         <div>
           {loadingItems.map((_, index) => (
@@ -68,6 +68,6 @@ export const UsersList = () => {
           <div ref={containerRef as RefObject<HTMLDivElement>} />
         </>
       )}
-    </section>
+    </ListWrapper>
   );
 };

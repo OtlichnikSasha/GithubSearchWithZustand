@@ -6,6 +6,7 @@ import styles from './TopicsList.module.scss';
 import { formatNumberHelper } from '@/helpers/formatNumber.helper';
 import { TopicItem } from './TopicItem/TopicItem';
 import { SearchNotFound } from '../SearchNotFound/SearchNotFound';
+import { ListWrapper } from '../ListWrapper/ListWrapper';
 
 const loadingItems = new Array(8).fill('');
 const per_page = 25;
@@ -36,7 +37,7 @@ export const TopicsList = () => {
   }
 
   return (
-    <div className={styles.repositoriesList}>
+    <ListWrapper>
       {isLoading ? (
         <>
           {loadingItems.map((_, index) => (
@@ -51,6 +52,6 @@ export const TopicsList = () => {
           ))}
         </>
       )}
-    </div>
+    </ListWrapper>
   );
 };
