@@ -32,7 +32,7 @@ export const Main = () => {
         <section className={styles.content}>
           {searchParams.get('type') &&
           typesVariants.includes(searchParams.get('type') as LinksEnum) ? (
-            <>{searchLists[searchParams.get('type') as LinksEnum]}</>
+            searchLists[searchParams.get('type') as LinksEnum]
           ) : (
             <Navigate to={`.../?q=${searchParams.get('q')}&type=${LinksEnum.REPOSITORIES}`} />
           )}

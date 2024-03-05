@@ -33,3 +33,10 @@ export const sidebarLinks: ISidebarLink[] = [
     type: LinksEnum.TOPICS,
   },
 ];
+
+export const programmingLanguages = [
+  { name: 'Javascript', color: '#f1e05a' },
+  { name: 'HTML', color: '#e34c26' },
+  { name: 'CSS', color: '#563d7c' },
+  { name: 'Typescript', color: '#3178c6' },
+];

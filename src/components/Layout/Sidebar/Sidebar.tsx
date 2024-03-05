@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { sidebarLinks } from './Sidebar.constants';
+import { sidebarLinks, programmingLanguages } from './Sidebar.constants';
 import styles from './Sidebar.module.scss';
 import { useEffect, useMemo } from 'react';
 import { useSearchUsersStore } from '@/store/modules/api/searchUsers.module';
@@ -10,6 +10,7 @@ import { Skeleton } from '@/components/UI/Skeleton/Skeleton';
 import { formatNumberHelper } from '@/helpers/formatNumber.helper';
 import { useSearchCodeStore } from '@/store/modules/api/searchCode.module';
 import { useSearchTopicsStore } from '@/store/modules/api/searchTopics.module';
+import { getAllQueryParamsHelper } from '@/helpers/getAllQueryParams.helper';
 
 export const Sidebar = () => {
   const [searchParams] = useSearchParams();
@@ -28,7 +29,10 @@ export const Sidebar = () => {
     }
   }, [searchParams.get('q')]);
 
-  const withdrawalTotal = useMemo(() => {
+  const withdrawalTotal = useMemo((): Record<
+    LinksEnum,
+    { isLoading: boolean; totalCount: number }
+  > => {
     return {
       [LinksEnum.USERS]: {
         isLoading: usersStore.isLoading && !usersStore.total_count,
@@ -84,6 +88,26 @@ export const Sidebar = () => {
           </li>
         ))}
       </ul>
+
+      <p>Languages</p>
+
+      <ul>
+        {programmingLanguages.map((language) => (
+          <li key={language.name}>
+            <Link
+              to={`..?${{ ...getAllQueryParamsHelper(searchParams) }}&language:${language.name}`}
+              title={language.name}
+            >
+              <span style={{ background: language.color }} />
+              {language.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <div className={styles.resizeSliderWrapper}>
+        <div className={styles.resizeSlider} />
+      </div>
     </aside>
   );
 };

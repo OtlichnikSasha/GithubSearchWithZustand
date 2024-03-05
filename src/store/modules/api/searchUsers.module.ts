@@ -6,7 +6,7 @@ interface IUsersStore {
   users: UserModel[];
   total_count: number;
   isLoading: boolean;
-  fetchUsers: (params: SearchUsersParams) => void;
+  fetchUsers: (params: SearchUsersParams, isNextPage?: boolean) => void;
 }
 
 export const useSearchUsersStore = create(
@@ -14,7 +14,7 @@ export const useSearchUsersStore = create(
     users: [],
     total_count: 0,
     isLoading: false,
-    fetchUsers: async (params) => {
+    fetchUsers: async (params, isNextPage) => {
       set((state) => {
         state.isLoading = true;
       });
@@ -24,7 +24,7 @@ export const useSearchUsersStore = create(
           state.total_count = data.total_count;
         });
         set((state) => {
-          state.users = data.items;
+          state.users = isNextPage ? [...state.users, ...data.items] : data.items;
         });
       } catch (_) {
         return;

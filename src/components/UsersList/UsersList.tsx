@@ -18,7 +18,6 @@ export const UsersList = () => {
 
   useEffect(() => {
     const searchQuery = searchParams.get('q');
-    // const typeQuery = searchParams.get('type');
     if (searchQuery) {
       fetchUsers({ q: searchQuery, per_page, page: pageRef.current });
     }
@@ -31,11 +30,9 @@ export const UsersList = () => {
   });
 
   useEffect(() => {
-    console.log(isVisible, isLoading, users.length);
-
     if (isVisible && !isLoading && users.length < total_count) {
       pageRef.current += 1;
-      //   fetchUsers({ q: searchValue, per_page, page: pageRef.current });
+      fetchUsers({ q: searchParams.get('q') || '', per_page, page: pageRef.current }, true);
     }
   }, [isVisible]);
 
@@ -53,21 +50,12 @@ export const UsersList = () => {
 
   return (
     <ListWrapper>
-      {isLoading ? (
-        <div>
-          {loadingItems.map((_, index) => (
-            <Skeleton key={index} />
-          ))}
-        </div>
-      ) : (
-        <>
-          {formatNumberHelper(total_count)} results
-          {users.map((user) => (
-            <UserItem key={user.id} user={user} />
-          ))}
-          <div ref={containerRef as RefObject<HTMLDivElement>} />
-        </>
-      )}
+      {formatNumberHelper(total_count)} results
+      {users.map((user) => (
+        <UserItem key={user.id} user={user} />
+      ))}
+      <div ref={containerRef as RefObject<HTMLDivElement>} />
+      {isLoading && loadingItems.map((_, index) => <Skeleton key={index} />)}
     </ListWrapper>
   );
 };

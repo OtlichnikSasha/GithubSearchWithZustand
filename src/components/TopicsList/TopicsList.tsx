@@ -13,7 +13,7 @@ const per_page = 25;
 
 export const TopicsList = () => {
   const [searchParams] = useSearchParams();
-  const { fetchTopics, isLoading, total_count, topics } = useSearchTopicsStore((state) => state);
+  const { fetchTopics, isLoading, total_count, topics } = useSearchTopicsStore();
 
   useEffect(() => {
     const searchParamsQuery = searchParams.get('q');
